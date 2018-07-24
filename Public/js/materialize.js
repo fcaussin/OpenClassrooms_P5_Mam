@@ -8989,7 +8989,7 @@ $jscomp.polyfill = function (e, r, p, m) {
         var month = i18n.monthsShort[displayDate.getMonth()];
         var date = displayDate.getDate();
         this.yearTextEl.innerHTML = displayDate.getFullYear();
-        this.dateTextEl.innerHTML = day + ", " + month + " " + date;
+        this.dateTextEl.innerHTML = day + " " + date + " " + month + ".";
       }
 
       /**
