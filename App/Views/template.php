@@ -19,39 +19,41 @@
   </head>
 
   <body>
-    <nav class="white" role="navigation">
-      <div class="nav-wrapper container">
-        <a href="index.php" id="logo-container" class="brand-logo"><img src="img/logo2.png" alt="logo" class="logo"></a>
-        <ul class="right hide-on-med-and-down">
-          <li><a href="index.php">Accueil</a></li>
-          <li><a href="#contact">Contact</a></li>
-          <!-- Si pas de session affiche se connecter -->
-          <?php if (empty($_SESSION)) {?>
-            <li><a href="index.php?action=login">Se Connecter</a></li>
+    <div class="navbar-fixed">
+      <nav class="white" role="navigation">
+        <div class="nav-wrapper container">
+          <a href="index.php" id="logo-container" class="brand-logo"><img src="img/logo2.png" alt="logo" class="logo"></a>
+          <ul class="right hide-on-med-and-down">
+            <li><a href="index.php">Accueil</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <!-- Si pas de session affiche se connecter -->
+            <?php if (empty($_SESSION)): ?>
+              <li><a href="index.php?action=login">Se Connecter</a></li>
 
-          <!-- Sinon affiche l'utilisateur et le lien de déconnexion -->
-          <?php } else { ?>
-            <li><a href="index.php?action=login"><?= $_SESSION['username']; ?></a></li>
-            <li><a href="index.php?action=disconnect">Se déconnecter</a></li>
-          <?php } ?>
-        </ul>
+            <!-- Sinon affiche l'utilisateur et le lien de déconnexion -->
+            <?php else: ?>
+              <li><a href="index.php?action=login"><?= $_SESSION['username']; ?></a></li>
+              <li><a href="index.php?action=disconnect">Se déconnecter</a></li>
+            <?php endif ?>
+          </ul>
 
-        <ul id="nav-mobile" class="sidenav deep-orange lighten-2">
-          <li><a href="index.php" class="white-text">Accueil</a></li>
-          <li><a href="#contact" class="white-text">Contact</a></li>
-          <!-- Si pas de session affiche se connecter -->
-          <?php if (empty($_SESSION)) {?>
-            <li><a href="index.php?action=login" class="white-text">Se Connecter</a></li>
+          <ul id="nav-mobile" class="sidenav deep-orange lighten-2">
+            <li><a href="index.php" class="white-text">Accueil</a></li>
+            <li><a href="#contact" class="white-text">Contact</a></li>
+            <!-- Si pas de session affiche se connecter -->
+            <?php if (empty($_SESSION)) {?>
+              <li><a href="index.php?action=login" class="white-text">Se Connecter</a></li>
 
-          <!-- Sinon affiche l'utilisateur et le lien de déconnexion -->
-          <?php } else { ?>
-            <li><a href="index.php?action=login" class="white-text"><?= $_SESSION['username']; ?></a></li>
-            <li><a href="index.php?action=disconnect" class="white-text">Se déconnecter</a></li>
-          <?php } ?>
-        </ul>
-        <a href="#" data-target="nav-mobile" class="sidenav-trigger orange-text text-lighten-2"><i class="material-icons">menu</i></a>
-      </div>
-    </nav>
+            <!-- Sinon affiche l'utilisateur et le lien de déconnexion -->
+            <?php } else { ?>
+              <li><a href="index.php?action=login" class="white-text"><?= $_SESSION['username']; ?></a></li>
+              <li><a href="index.php?action=disconnect" class="white-text">Se déconnecter</a></li>
+            <?php } ?>
+          </ul>
+          <a href="#" data-target="nav-mobile" class="sidenav-trigger orange-text text-lighten-2"><i class="material-icons">menu</i></a>
+        </div>
+      </nav>
+    </div>
 
 
     <?= $content ?>
@@ -106,7 +108,7 @@
     </footer>
 
     <script type="text/javascript" src="js/jquery.js"></script>
-    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <script type="text/javascript" src="js/materialize.js"></script>
     <script type="text/javascript" src="js/init.js"></script>
   </body>
 </html>

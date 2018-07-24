@@ -9,18 +9,19 @@
         <div class="col s12 center">
           <h3><i class="mdi-content-send brown-text"></i></h3>
           <h4>Se connecter</h4>
+          <p class="red-text"><?= $errorLogin ?></p>
         </div>
-        <form class="col s12 offset-s2">
+        <form class="col s12 offset-s2" action="index.php?action=userLogin" method="post">
           <div class="row">
             <div class="input-field col s9 center">
-              <input id="first_name" type="text" class="validate" required>
+              <input id="first_name" type="text" class="validate" name="username" required>
               <label for="first_name">Nom d'Utilisateur</label>
             </div>
           </div>
           <div class="row">
             <div class="input-field col s9 center">
-              <input id="password" type="password" class="validate" required>
-              <label for="password">Password</label>
+              <input id="password" type="password" class="validate" name="password" required>
+              <label for="password">Mot de passe</label>
             </div>
           </div>
           <div class="row">
