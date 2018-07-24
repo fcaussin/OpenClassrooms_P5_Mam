@@ -44,9 +44,24 @@
       return $this->childName;
     }
 
+    public function familyName()
+    {
+      return $this->familyName;
+    }
+
     public function birthday()
     {
       return $this->birthday;
+    }
+
+    public function height()
+    {
+      return $this->height;
+    }
+
+    public function weight()
+    {
+      return $this->weight;
     }
 
     public function note()
@@ -73,9 +88,26 @@
       }
     }
 
+    public function setFamilyName($familyName)
+    {
+      if (is_string($familyName)) {
+        $this->familyName = $familyName;
+      }
+    }
+
     public function setBirthday($birthday)
     {
       $this->birthday = $birthday;
+    }
+
+    public function setHeight($height)
+    {
+      $this->height = (int) $height;
+    }
+
+    public function setWeight($weight)
+    {
+      $this->weight = (float) $weight;
     }
 
     public function setNote($note)

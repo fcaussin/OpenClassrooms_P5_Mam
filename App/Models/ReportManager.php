@@ -6,10 +6,21 @@
 
   class ReportManager extends PDOManager
   {
+
+    // Récupère le dernier rapport d'un enfant
+    public function lastReport($childId)
+    {
+      $sq = "SELECT id, childId, DATE_FORMAT(dateReport, '%d-%m-%Y') AS dateReport_fr, behavior, comments, activities, meal, nap FROM report WHERE childId = ? ORDER BY dateReport DESC LIMIT 0, 1";
+
+      $report = $this->executeRequest($sql, array($childId));
+
+      return $report;
+    }
+
     // Récupère les rapport d'un enfants
     public function getReports($childId)
     {
-      $sql = "SELECT id, childId, DATE_FORMAT(dateReport, '%d/%m/%Y') AS dateRport_fr, behavior, comments, activities, meal, nap FROM report WHERE childId = ? ORDER BY dateReport DESC";
+      $sql = "SELECT id, childId, DATE_FORMAT(dateReport, '%d-%m-%Y') AS dateReport_fr, behavior, comments, activities, meal, nap FROM report WHERE childId = ? ORDER BY dateReport DESC";
 
       $reports = $this->executeRequest($sql, array($childId));
 
