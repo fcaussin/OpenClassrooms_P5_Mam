@@ -6,7 +6,10 @@
   <div class="section">
     <div class="row">
       <h4 class="center">Modifier le compte-rendu de : <span class="deep-orange-text text-lighten-2"><?= $child['childName'] . " " . $child['familyName'] ?></span></h4>
+
+
       <!-- FORMULAIRE DE MODIFICATION D'UN RAPPORT -->
+
       <form class="col s12" action="index.php?action=updateReport" method="post">
 
         <div class="row">
@@ -33,8 +36,6 @@
             <label for="comments">Commentaires</label>
           </div>
         </div>
-
-
 
         <div class="row">
           <!-- Activities -->
@@ -73,7 +74,6 @@
         <input type="hidden" name="childId" value="<?= $report['childId'] ?>" />
         <input type="hidden" name="reportId" value="<?= $report['id'] ?>" />
       </form>
-      </div>
     </div>
   </div>
 </div>

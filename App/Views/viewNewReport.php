@@ -6,7 +6,10 @@
   <div class="section">
     <div class="row">
       <h4 class="center">Ajouter un compte-rendu à : <span class="deep-orange-text text-lighten-2"><?= $child['childName'] . " " . $child['familyName'] ?></span></h4>
+
+
       <!-- FORMULAIRE DE CREATION D'UN RAPPORT -->
+
       <form class="col s12" action="index.php?action=createReport" method="post">
 
         <div class="row">
@@ -33,8 +36,6 @@
             <label for="comments">Commentaires</label>
           </div>
         </div>
-
-
 
         <div class="row">
           <!-- Activities -->
@@ -72,9 +73,10 @@
         <!-- Données supplémentaires envoyées -->
         <input type="hidden" name="childId" value="<?= $child['id'] ?>" />
       </form>
+
+      <!-- LIEN: Retour à la page d'accueil -->
       <div class="row center">
         <p><a href="index.php?action=login" class="collection-item blue-text text-lighten-1">Retour</a></p>
-
       </div>
     </div>
   </div>

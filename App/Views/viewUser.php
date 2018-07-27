@@ -16,7 +16,9 @@
           <div class="card hoverable z-depth-2">
             <div class="card-content">
 
-              <!-- Données de l'enfant -->
+
+              <!-- DONNEES DE L'ENFANT -->
+
               <span class="card-title deep-orange-text text-lighten-2"><?= $children['childName'] . " " . $children['familyName']?></span>
               <p>
               Date de naissance : <?= $children['birthday_fr'] ?><br>
@@ -24,7 +26,9 @@
               Poids : <?= $children['weight'] ?> kg</p>
               <br>
 
-              <!-- Menus déroulants -->
+
+              <!-- MENUS DEROULANTS -->
+
               <ul class="collapsible popout">
                 <!-- Informations -->
                 <li class="active">
@@ -34,8 +38,10 @@
                     <span class="badge white-text"><i class="material-icons">arrow_drop_down</i></span>
                   </div>
                   <div class="collapsible-body">
+                    <!-- SI Base de données vide affiche "Aucune information" -->
                     <?php if (!$children['note']): ?>
                       <p>Aucune informations</p>
+                    <!-- SINON Affiche les données informations -->
                     <?php else: ?>
                       <p><?= $children['note'] ?></p>
                     <?php endif; ?>
@@ -51,37 +57,47 @@
                   </div>
 
                   <div class="collapsible-body">
-                      <div class="collection">
-                        <!-- LIEN: Dernier rapport -->
-                        <a href="index.php?action=lastReport&id=<?= $children['id'] ?>&parentId=<?= $children['parentId'] ?>" class="collection-item black-text">Dernier rapport</a>
-                        <!-- LIEN: Liste des rapports -->
-                        <a href="index.php?action=listReportByMonth&id=<?= $children['id'] ?>&parentId=<?= $children['parentId'] ?>" class="collection-item black-text">
-                        <?php if ($_SESSION['admin'] == 1): ?>
-                            Modifier/Supprimer un rapport</a>
-                            <a href="index.php?action=newReport&id=<?= $children['id'] ?>" class="collection-item black-text">Créer un rapport</a>
-                        <?php else: ?>
-                          Liste des rapports</a>
-                        <?php endif; ?>
-                      </div>
+                    <div class="collection">
+                      <!-- LIEN: Dernier rapport -->
+                      <a href="index.php?action=lastReport&id=<?= $children['id'] ?>&parentId=<?= $children['parentId'] ?>" class="collection-item black-text">Dernier rapport</a>
+                      <!-- LIEN: Liste des rapports -->
+                      <a href="index.php?action=listReportByMonth&id=<?= $children['id'] ?>&parentId=<?= $children['parentId'] ?>" class="collection-item black-text">
+
+                      <!-- SI l'utilisateur est un administrateur -->
+                      <?php if ($_SESSION['admin'] == 1): ?>
+                        <!-- LIEN: Modifier/Supprimer un rapport -->
+                        Modifier/Supprimer un rapport</a>
+                        <a href="index.php?action=newReport&id=<?= $children['id'] ?>" class="collection-item black-text">Créer un rapport</a>
+                      <!-- SINON LIEN: Liste des rapports -->
+                      <?php else: ?>
+                        Liste des rapports</a>
+                      <?php endif; ?>
+                    </div>
                   </div>
                 </li>
               </ul>
             </div>
 
-            <!-- Lien modification ou suppression des informations -->
+            <!-- LIEN: Modification ou Suppression des informations -->
             <div class="card-action white">
               <a class="blue-text text-lighten-1" href="<?= "index.php?action=childAdmin&id=" . $children['id'] ?>">Modifier</a>
 
-              <!-- SUPPRESSION d'un enfant avec popup confirmation coté ADMIN -->
+              <!-- SI l'utilisateur est un administrateur -->
               <?php if ($_SESSION['admin'] == 1): ?>
+                <!-- LIEN POPUP: Supprimer un enfant -->
                 <a class="blue-text text-lighten-1 right-align modal-trigger" href="#modal<?= $children['id']?>">Supprimer</a>
+
+
+                <!-- POPUP: SUPPRESSION D'UN ENFANT -->
 
                 <div id="modal<?=$children['id']?>" class="modal center">
                   <div class="modal-content">
                     <h4>Suppression</h4>
                     <p>Voulez-vous supprimer la fiche de <?= $children['childName'] . " " . $children['familyName']?></p>
 
+
                     <!-- FORMULAIRE SUPPRESSION D'UN ENFANT -->
+
                     <form action="index.php?action=deleteChild&id=<?= $children['id']?>" method="post">
                       <!-- Données envoyées caché pour vérification -->
                       <input type="hidden" name="childId" value="<?= $children['id'] ?>">
@@ -98,22 +114,25 @@
       <?php endforeach; ?>
 
 
-
-      <!-- AJOUT D'UN ENFANT PARTIE ADMINISTRATEUR -->
-
-
+      <!-- Si l'utilisateur est un administrateur -->
       <?php if ($_SESSION['admin'] == 1): ?>
-        <!-- Bouton création d'un enfant -->
+
+        <!-- LIEN POPUP: Création d'un enfant -->
         <div class="col s12 m6 center">
           <br>
           <a class="btn-floating btn-large waves-effect waves-light blue lighten-1 btn modal-trigger" href="#popup"><i class="material-icons">person_add</i></a>
         </div>
 
-        <!-- Popup formulaire de création -->
+
+        <!-- POPUP: CREATION D'UN ENFANT -->
+
         <div id="popup" class="modal">
           <div class="modal-content">
             <h4 class="deep-orange-text text-lighten-2 center">Création d'une fiche enfant:</h4>
+
+
             <!-- FORMULAIRE DE CREATION DE L'ENFANT -->
+
             <form class="col s12" action="index.php?action=createChild" method="post">
 
               <div class="row">
@@ -134,8 +153,12 @@
                 <div class="input-field col s6 m6">
                   <select name="parentId" required>
                     <option value="" disabled selected>Sélectionnez un parent</option>
+
+                    <!-- POUR chaque utilisateur -->
                     <?php foreach ($user as $user): ?>
+                      <!-- SI l'utilisateur est un parent -->
                       <?php if ($user['admin'] == 0): ?>
+                        <!-- Affiche le parent comme option sélectionnable -->
                         <option value="<?= $user['id'] ?>"><?= $user['username'] ?></option>
                       <?php endif; ?>
                     <?php endforeach; ?>

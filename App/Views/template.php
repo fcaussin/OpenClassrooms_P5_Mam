@@ -8,60 +8,81 @@
     <link type="text/css" rel="stylesheet" href="css/styles.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+    <!-- Titre de la page  -->
     <title> <?= $title ?> </title>
   </head>
 
   <body>
     <div class="bloc-page">
+      <!-- Barre de navigation -->
       <div class="navbar">
         <nav class="white" role="navigation">
           <div class="nav-wrapper container">
+
+            <!-- Logo -->
             <a href="index.php" id="logo-container" class="brand-logo"><img src="img/logo2.png" alt="logo" class="logo"></a>
+
+            <!-- Barre de navigation normale -->
             <ul class="right hide-on-med-and-down">
               <li><a href="index.php">Accueil</a></li>
               <li><a href="#contact">Contact</a></li>
-              <!-- Si pas de session affiche contact et se connecter -->
-              <?php if (empty($_SESSION)): ?>
-              <li><a href="index.php?action=login">Se Connecter</a></li>
 
-              <!-- Sinon affiche l'utilisateur et le lien de déconnexion -->
+              <!-- SI l'utilisateur n'est pas connecté affiche et "Se Connecter" -->
+              <?php if (empty($_SESSION)): ?>
+                <li><a href="index.php?action=login">Se Connecter</a></li>
+
+              <!-- SINON affiche lIEN: Accueil utilisateur -->
               <?php else: ?>
                 <li><a href="index.php?action=login"><?= $_SESSION['username']; ?></a></li>
 
+                <!-- SI l'utilisateur est un administrateur -->
                 <?php if ($_SESSION['admin'] == 1): ?>
+                  <!-- LIEN: Gestion des utilisateurs -->
                   <li><a href="index.php?action=usersAdmin" ><i class="material-icons">people</i></a></li>
                 <?php endif; ?>
+
+                <!-- LIEN: Modifier mot de passe et se déconnecter -->
                 <li><a href="index.php?action=loginAdmin"><i class="material-icons">settings</i></a></li>
                 <li><a href="index.php?action=disconnect">Se déconnecter</a></li>
-              <?php endif ?>
+              <?php endif; ?>
             </ul>
 
+            <!-- Barre de navigation petit écran -->
             <ul id="nav-mobile" class="sidenav deep-orange lighten-2">
               <li><a href="index.php" class="white-text">Accueil</a></li>
               <li><a href="#contact" class="white-text">Contact</a></li>
-              <!-- Si pas de session affiche contact et se connecter -->
-              <?php if (empty($_SESSION)) {?>
+
+              <!-- SI l'utilisateur n'est pas connecté affiche et "Se Connecter" -->
+              <?php if (empty($_SESSION)): ?>
               <li><a href="index.php?action=login" class="white-text">Se Connecter</a></li>
 
-              <!-- Sinon affiche l'utilisateur et le lien de déconnexion -->
-              <?php } else { ?>
+              <!-- SINON affiche lIEN: Accueil utilisateur -->
+              <?php else: ?>
                 <li><a href="index.php?action=login" class="white-text"><?= $_SESSION['username']; ?></a></li>
+
+                <!-- SI l'utilisateur est un administrateur -->
                 <?php if ($_SESSION['admin'] == 1): ?>
+                  <!-- LIEN: Gestion des utilisateurs -->
                   <li><a href="index.php?action=usersAdmin" class="white-text">Gestion des Utilisateurs</a></li>
                 <?php endif; ?>
+
+                <!-- LIEN: Modifier mot de passe et se déconnecter -->
                 <li><a href="index.php?action=loginAdmin" class="white-text">Paramètres</a></li>
                 <li><a href="index.php?action=disconnect" class="white-text">Se déconnecter</a></li>
-              <?php } ?>
+              <?php endif; ?>
             </ul>
+
+            <!-- Icone hamburger  -->
             <a href="#" data-target="nav-mobile" class="sidenav-trigger orange-text text-lighten-2"><i class="material-icons">menu</i></a>
           </div>
         </nav>
       </div>
 
 
+      <!-- MAIN -->
       <?= $content ?>
 
-
+      <!-- Deuxième image -->
       <div class="parallax-container valign-wrapper">
         <div class="parallax"><img src="img/enfant2.jpg" alt="Photo d'enfant"></div>
       </div>
@@ -70,6 +91,7 @@
       <div class="container">
         <div class="section contact" id="contact">
 
+          <!-- Contact -->
           <div class="row">
             <div class="col s12 center">
               <h4>Contactez-nous</h4>
@@ -84,18 +106,15 @@
         </div>
       </div>
 
-
+      <!-- Footer -->
       <footer class="page-footer deep-orange lighten-2">
         <div class="container">
           <div class="row">
-            <div class="col l6 s12">
+            <div class="col s12 m6">
               <h5 class="white-text">Maison d'Assistantes Maternelles des Poussins</h5>
             </div>
 
-            <div class="col l3 s12">
-            </div>
-
-            <div class="col l3 s12">
+            <div class="col s12 m3 offset-m3">
               <p class="grey-text text-lighten-4"><i class="tiny material-icons">home</i>  Route de Nice 06650 Opio<br />
                 <i class="tiny material-icons">call</i>  04.01.01.01.01.<br />
               </p>

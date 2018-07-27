@@ -5,8 +5,12 @@
 <div class="container">
   <div class="section">
     <div class="row">
+      <!-- Titre -->
       <h4 class="center">Modifier les informations de : <span class="deep-orange-text text-lighten-2"><?= $child['childName'] . " " . $child['familyName'] ?></span></h4>
+
+
       <!-- FORMULAIRE DE MODIFICATION DE L'ENFANT -->
+
       <form class="col s12" action="index.php?action=updateChild" method="post">
 
         <div class="row">
