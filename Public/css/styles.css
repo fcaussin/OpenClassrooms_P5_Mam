@@ -1,17 +1,16 @@
-/* Custom Stylesheet */
-/**
- * Use this file to override Materialize files so you can update
- * the core Materialize files in the future
- *
- * Made By MaterializeCSS.com
- */
-.logo {
-  height: 50px;
-  margin: 5px;
+body {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  width: 100%;
 }
 
-.description {
-  text-align: justify;
+.bloc-page {
+  border: 1px solid grey;
+  margin: auto;
+  max-width: 1600px;
+  width: 100%;
 }
 
 nav ul a,
@@ -23,19 +22,68 @@ p {
   line-height: 2rem;
 }
 
-.sidenav-trigger {
-  color: #ff8a65;
+nav {
+  max-width: 1600px;
+}
+
+.logo {
+  height: 50px;
+  margin: 5px;
+}
+
+.description {
+  text-align: justify;
 }
 
 .parallax-container {
-  min-height: 380px;
-  line-height: 0;
+  color: rgb(255,255,255);
   height: auto;
-  color: rgba(255,255,255,.9);
+  line-height: 0;
+  min-height: 380px;
 }
 
 .parallax-container .section {
   width: 100%;
+}
+
+.report-title {
+  border: 3px solid #ff8a65;
+  border-radius: 10px;
+  padding: 0 10px 0 10px;
+}
+
+.report-info {
+  border: 3px solid #42a5f5;
+  border-radius: 10px;
+  margin-top: 20px;
+  padding: 0 10px 0 10px;
+  text-align: justify;
+}
+
+.report-info2 {
+  border: 2px dashed black;
+  border-radius: 10px;
+  margin-top: 20px;
+  padding: 0 10px 0 10px;
+  text-align: center;
+}
+
+.report-info3 {
+  border: 5px double #ff8a65;
+  border-radius: 10px;
+  margin-top: 20px;
+  padding: 0 10px 0 10px;
+  text-align: justify;
+}
+
+.report-page {
+  font-size: 1.1em;
+}
+
+.report-content {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
 @media only screen and (max-width : 992px) {
@@ -46,6 +94,9 @@ p {
   #index-banner .section {
     top: 10%;
   }
+  #login-button {
+   display: none;
+ }
 }
 
 @media only screen and (max-width : 600px) {
@@ -61,6 +112,6 @@ p {
   font-size: inherit;
 }
 
-footer.page-footer {
+.page-footer {
   margin: 0;
 }

@@ -7,7 +7,6 @@
   <div class="section">
     <div class="row">
         <div class="col s12 center">
-          <h3><i class="mdi-content-send brown-text"></i></h3>
           <h4>Se connecter</h4>
           <p class="red-text"><?= $errorLogin ?></p>
         </div>

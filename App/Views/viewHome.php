@@ -11,8 +11,8 @@
       <div class="row center">
         <h5 class="header col s12 light">La Maison d'Assistantes Maternelles des Poussins située à Opio, accueille vos enfants et offre tout le confort nécessaire pour qu'ils se sentent "comme à la maison"</h5>
       </div>
-      <div class="row center">
-        <a href="index.php?action=login" id="download-button" class="btn-large waves-effect waves-light deep-orange lighten-2">
+      <div class="row center login-btn">
+        <a href="index.php?action=login" id="login-button" class="btn-large waves-effect waves-light deep-orange lighten-2">
           <?php if (empty($_SESSION)): ?>
             Se connecter
           <?php else: ?>

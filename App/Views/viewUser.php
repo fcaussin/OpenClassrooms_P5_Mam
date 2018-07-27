@@ -7,7 +7,7 @@
     <div class="row">
       <div class="col s12 center">
         <h4>Informations de votre/vos enfant(s)</h4>
-        <p>Vous pouvez modifier les informations de votre/vos enfant(s), n'hésitez pas à les mettre à jour régulièrement. Vous avez accès également au dernier compte-rendu ou à l'historique des 30 derniers.</p>
+        <p>Vous pouvez modifier les informations de votre/vos enfant(s), n'hésitez pas à les mettre à jour régulièrement. Vous avez accès au dernier compte-rendu et également à tout l'historique sur un an.</p>
       </div>
 
       <!-- Affiche une carte pour chaque enfants -->
@@ -41,6 +41,7 @@
                     <?php endif; ?>
                   </div>
                 </li>
+
                 <!-- Rapports -->
                 <li>
                   <div class="collapsible-header white-text deep-orange lighten-2">
@@ -48,10 +49,19 @@
                     Rapports
                     <span class="badge white-text"><i class="material-icons">arrow_drop_down</i></span>
                   </div>
+
                   <div class="collapsible-body">
                       <div class="collection">
-                        <a href="" class="collection-item black-text">Dernier rapport</a>
-                        <a href="" class="collection-item black-text">Liste des rapports</a>
+                        <!-- LIEN: Dernier rapport -->
+                        <a href="index.php?action=lastReport&id=<?= $children['id'] ?>&parentId=<?= $children['parentId'] ?>" class="collection-item black-text">Dernier rapport</a>
+                        <!-- LIEN: Liste des rapports -->
+                        <a href="index.php?action=listReportByMonth&id=<?= $children['id'] ?>&parentId=<?= $children['parentId'] ?>" class="collection-item black-text">
+                        <?php if ($_SESSION['admin'] == 1): ?>
+                            Modifier/Supprimer un rapport</a>
+                            <a href="index.php?action=newReport&id=<?= $children['id'] ?>" class="collection-item black-text">Créer un rapport</a>
+                        <?php else: ?>
+                          Liste des rapports</a>
+                        <?php endif; ?>
                       </div>
                   </div>
                 </li>
@@ -62,19 +72,19 @@
             <div class="card-action white">
               <a class="blue-text text-lighten-1" href="<?= "index.php?action=childAdmin&id=" . $children['id'] ?>">Modifier</a>
 
-              <!-- Suppression d'un enfant avec popup confirmation coté ADMIN -->
+              <!-- SUPPRESSION d'un enfant avec popup confirmation coté ADMIN -->
               <?php if ($_SESSION['admin'] == 1): ?>
                 <a class="blue-text text-lighten-1 right-align modal-trigger" href="#modal<?= $children['id']?>">Supprimer</a>
 
-                <div id="modal<?=$children['id']?>" class="modal">
+                <div id="modal<?=$children['id']?>" class="modal center">
                   <div class="modal-content">
                     <h4>Suppression</h4>
                     <p>Voulez-vous supprimer la fiche de <?= $children['childName'] . " " . $children['familyName']?></p>
 
                     <!-- FORMULAIRE SUPPRESSION D'UN ENFANT -->
-                    <form class="" action="index.php?action=deleteChild&id=<?= $children['id']?>" method="post">
+                    <form action="index.php?action=deleteChild&id=<?= $children['id']?>" method="post">
                       <!-- Données envoyées caché pour vérification -->
-                      <input type="hidden" name="idChild" value="<?= $children['id'] ?>">
+                      <input type="hidden" name="childId" value="<?= $children['id'] ?>">
                       <!-- Bouton valider et annuler -->
                       <button class="btn waves-effect waves-light deep-orange lighten-2" type="submit" name="action">Supprimer</button>
                       <a href="#!" class="modal-close btn waves-effect waves-light deep-orange lighten-2">Annuler</a>
@@ -102,7 +112,7 @@
         <!-- Popup formulaire de création -->
         <div id="popup" class="modal">
           <div class="modal-content">
-            <h4 class="deep-orange-text text-lighten-2">Création d'une fiche enfant:</h4>
+            <h4 class="deep-orange-text text-lighten-2 center">Création d'une fiche enfant:</h4>
             <!-- FORMULAIRE DE CREATION DE L'ENFANT -->
             <form class="col s12" action="index.php?action=createChild" method="post">
 
@@ -143,12 +153,14 @@
                 <!-- Taille -->
                 <div class="range-field col s6">
                   <label for="height">Taille (cm)</label>
-                  <input id="height" name="height" type="range" min="30" max="150" required />
+                  <output id="range_height_disp"></output>
+                  <input id="range_height" name="height" type="range" min="30" max="150" oninput="range_height_disp.value = range_height.value" required />
                 </div>
                 <!-- Poids -->
                 <div class="range-field col s6">
                   <label for="weight">Poids (kg)</label>
-                  <input id="weight" name="weight" type="range" min="0" max="25" step="0.01" required />
+                  <output id="range_weight_disp"></output>
+                  <input id="range_weight" name="weight" type="range" min="0" max="25" step="0.01" oninput="range_weight_disp.value = range_weight.value" required />
                 </div>
               </div>
 
@@ -163,7 +175,7 @@
               <!-- Bouton Valider -->
               <div class="row center">
                 <button class="btn waves-effect waves-light deep-orange lighten-2" type="submit" name="action">Valider</button>
-                <button class="btn waves-effect waves-light modal-close deep-orange lighten-2" type="submit" name="action">Annuler</button>
+                <button class="btn waves-effect waves-light modal-close deep-orange lighten-2" type="reset">Annuler</button>
               </div>
             </form>
           </div>

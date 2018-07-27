@@ -20,9 +20,15 @@
     {
       $child = $this->children->getChild($childId);
 
-      // Génère la vue adminChild
-      $view = new View("adminChild");
-      $view->generateView(array('child' => $child));
+      if (($_SESSION['admin'] == 1 && isset($child["id"])) || $child['parentId'] == $_SESSION['id'])
+      {
+        // Génère la vue adminChild
+        $view = new View("adminChild");
+        $view->generateView(array('child' => $child));
+      }
+      else {
+        throw new \Exception("Cet enfant n'existe pas");
+      }
     }
 
     public function changeChild($parentId, $childName, $familyName, $birthday, $height, $weight, $note, $id)
@@ -37,9 +43,9 @@
       $this->children->addChild($newChild);
     }
 
-    public function eraseChild($id)
+    public function eraseChild($childId)
     {
-      $this->children->deleteChild($id);
+      $this->children->deleteChild($childId);
     }
   }
 ?>

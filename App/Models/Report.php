@@ -11,7 +11,8 @@
             $comments,
             $activities,
             $meal,
-            $nap;
+            $nap,
+            $info;
 
     public function hydrate($data)
     {
@@ -73,6 +74,11 @@
       return $this->nap;
     }
 
+    public function info()
+    {
+      return $this->info;
+    }
+
     // SETTERS
 
     public function setId($id)
@@ -87,7 +93,7 @@
 
     public function setDateReport($dateReport)
     {
-      $this->datereport = $dateReport;
+      $this->dateReport = $dateReport;
     }
 
     public function setBehavior($behavior)
@@ -122,6 +128,13 @@
     {
       if (is_string($nap)) {
         $this->nap = $nap;
+      }
+    }
+
+    public function setInfo($info)
+    {
+      if (is_string($info)) {
+        $this->info = $info;
       }
     }
   }

@@ -58,6 +58,7 @@
       else {
         $errorLogin = "Votre identifiant ou votre mot de passe est incorrect";
 
+        // Affiche la vue Login
         $viewLogin = new View("Login");
         $viewLogin->generateView(array('errorLogin' => $errorLogin));
       }
@@ -73,6 +74,5 @@
       setcookie('login', '');
       setcookie('pass_hache', '');
     }
-
   }
 ?>

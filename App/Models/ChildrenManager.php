@@ -24,6 +24,7 @@
       $children = $req->fetch();
 
       return $children;
+      $req->closeCursor();
     }
 
     // Récupère tous les enfants

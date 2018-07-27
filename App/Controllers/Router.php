@@ -11,6 +11,7 @@
     private $viewLogin;
     private $ctrlUsers;
     private $ctrlChildren;
+    private $ctrlReport;
 
 
     public function __construct()
@@ -19,6 +20,7 @@
       $this->viewLogin = new View("Login");
       $this->ctrlUsers = new UsersController;
       $this->ctrlChildren = new ChildrenController;
+      $this->ctrlReport = new ReportController;
     }
 
 
@@ -51,6 +53,7 @@
               $this->ctrlUsers->Login($username, $password);
             break;
 
+            // Requête deconnexion
             case 'disconnect':
               $this->ctrlUsers->disconnect();
               // Retour à la page d'accueil après déconnexion
@@ -61,7 +64,7 @@
             case 'childAdmin':
               if (isset($_SESSION['id'])) {
                 $childId = intval($this->getParameter($_GET, 'id'));
-                if ($childId != 0) {
+                if ($childId > 0) {
                 $this->ctrlChildren->childAdmin($childId);
                 }
                 else {
@@ -99,7 +102,7 @@
             case 'updateChild':
               if (isset($_SESSION['id'])) {
                 // Récupère les paramètres
-                $id = intval($this->getParameter($_POST, 'idChild'));
+                $id = intval($this->getParameter($_POST, 'childId'));
                 $parentId = intval($this->getParameter($_POST, 'parentId'));
                 $childName = $this->getParameter($_POST, 'childName');
                 $familyName = $this->getParameter($_POST, 'familyName');
@@ -120,14 +123,15 @@
               }
             break;
 
+            // Requête de suppression d'un enfant
             case 'deleteChild':
               if (isset($_SESSION['admin']) == 1) {
                 // Récupère les paramètres
-                $id_Get= intval($this->getParameter($_GET, 'id'));
-                $id = intval($this->getParameter($_POST,'idChild'));
+                $id_Get = intval($this->getParameter($_GET, 'id'));
+                $childId = intval($this->getParameter($_POST,'childId'));
                 // Si id de l'article est valide on le supprime
-                if ($id_Get == $id) {
-                  $this->ctrlChildren->eraseChild($id);
+                if ($id_Get == $childId) {
+                  $this->ctrlChildren->eraseChild($childId);
 
                   //Affiche la page d'accueil utilisateur
                   $this->ctrlUsers->homeUser();
@@ -136,7 +140,173 @@
               else {
                 throw new \Exception("Vous n'avez pas les droits nécessaires");
               }
+            break;
 
+            // Requête d'affichage du dernier rapport
+            case 'lastReport':
+              if (isset($_SESSION['id'])) {
+                // Récupère les paramètres
+                $parentId = intval($this->getParameter($_GET, 'parentId'));
+                $childId = intval($this->getParameter($_GET, 'id'));
+                // Si id parent valide ou administrateur on affiche le rapport
+                if (($_SESSION['id'] == $parentId) OR ($_SESSION['admin'] == 1)){
+                  $this->ctrlReport->lastChildReport($childId);
+                }
+                else {
+                  throw new \Exception("Vous n'avez pas les droits nécessaires");
+                }
+              }
+              else {
+                throw new \Exception("Vous n'êtes pas connecté");
+              }
+            break;
+
+            // Requête d'affichage d'un rapport
+            case 'reportById':
+              if (isset($_SESSION['id'])) {
+                // Récupère les paramètres
+                $parentId = intval($this->getParameter($_GET, 'parentId'));
+                $childId = intval($this->getParameter($_GET, 'id'));
+                $reportId = intval($this->getParameter($_GET, 'reportId'));
+                // Si id parent valide ou administrateur on affiche le rapport
+                if (($_SESSION['id'] == $parentId) OR ($_SESSION['admin'] == 1)){
+                  $this->ctrlReport->childReport($childId, $reportId);
+                }
+                else {
+                  throw new \Exception("Vous n'avez pas les droits nécessaires");
+                }
+              }
+              else {
+                throw new \Exception("Vous n'êtes pas connecté");
+              }
+            break;
+
+            // Requête d'affichage de la liste des rapports par mois
+            case 'listReportByMonth':
+              if (isset($_SESSION['id'])) {
+                // Récupère les paramètres
+                $parentId = intval($this->getParameter($_GET, 'parentId'));
+                $childId = intval($this->getParameter($_GET, 'id'));
+                // Si id parent valide ou administrateur on affiche les rapport
+                if (($_SESSION['id'] == $parentId) OR ($_SESSION['admin'] == 1)){
+                  $this->ctrlReport->listReportsByMonth($childId);
+                }
+                else {
+                  throw new \Exception("Vous n'avez pas les droits nécessaires");
+                }
+              }
+              else {
+                throw new \Exception("Vous n'êtes pas connecté");
+              }
+            break;
+
+            //Requête d'affichage de la liste des rapports du mois
+            case 'listReports':
+            if (isset($_SESSION['id'])) {
+              // Récupère les paramètres
+              $parentId = intval($this->getParameter($_GET, 'parentId'));
+              $childId = intval($this->getParameter($_GET, 'id'));
+              $monthId = intval($this->getParameter($_GET, 'monthId'));
+              if (($_SESSION['id'] == $parentId) OR ($_SESSION['admin'] == 1)) {
+                $this->ctrlReport->listReports($childId, $monthId);
+              }
+              else {
+                throw new \Exception("Vous n'avez pas les droits nécessaires");
+              }
+            }
+            else {
+              throw new \Exception("Vous n'êtes pas connecté");
+            }
+            break;
+
+            // Requête afficher page création d'un nouveau rapport
+            case 'newReport':
+              if (isset($_SESSION['admin']) == 1) {
+                // Récupère les paramètres
+                $childId = intval($this->getParameter($_GET, 'id'));
+
+                $this->ctrlReport->newReport($childId);
+              }
+              else {
+                throw new \Exception("Vous n'avez pas les droits nécessaires");
+              }
+            break;
+
+            // Requête de création d'un nouveau rapport
+            case 'createReport':
+              if (isset($_SESSION['admin']) == 1) {
+                $childId = intval($this->getParameter($_POST, 'childId'));
+                $dateReport = $this->getParameter($_POST, 'dateReport');
+                $dateReport = date('Y-m-d', strtotime($dateReport));
+                $behavior = $this->getParameter($_POST, 'behavior');
+                $comments = $this->getParameter($_POST, 'comments');
+                $activities = $this->getParameter($_POST, 'activities');
+                $meal = $this->getParameter($_POST, 'meal');
+                $nap = $this->getParameter($_POST, 'nap');
+                $info = $this->getParameter($_POST, 'info');
+
+                $this->ctrlReport->createReport($childId, $dateReport, $behavior, $comments, $activities, $meal, $nap, $info);
+              }
+              else {
+                throw new \Exception("Vous n'avez pas les droits nécessaires");
+              }
+            break;
+
+            // Requête de suppression d'un rapport
+            case 'deleteReport':
+              if (isset($_SESSION['admin']) == 1) {
+                // Récupère les paramètres
+                $id_Get = intval($this->getParameter($_GET, 'id'));
+                $reportId = intval($this->getParameter($_POST, 'reportId'));
+                // Si id du rapport est valide on supprime
+                if ($id_Get == $reportId) {
+                  $this->ctrlReport->eraseReport($reportId);
+
+                  // Affiche la page d'accueil utilisateur
+                  $this->ctrlUsers->homeUser();
+                }
+              }
+              else {
+                throw new \Exception("Vous n'avez pas les droits nécessaires");
+              }
+            break;
+
+            // Requête affichage administration rapport
+            case 'reportAdmin':
+              if (isset($_SESSION['admin']) == 1) {
+                $reportId = intval($this->getParameter($_GET, 'id'));
+                $childId = intval($this->getParameter($_GET, 'childId'));
+                if ($reportId > 0) {
+                  $this->ctrlReport->reportAdmin($reportId, $childId);
+                }
+                else {
+                  throw new \Exception("Identifiant du rapport non valide");
+                }
+              }
+              else {
+                throw new \Exception("Vous n'avez pas les droits nécessaires");
+              }
+            break;
+
+            // Requête de modification d'un rapport
+            case 'updateReport':
+              if (isset($_SESSION['admin']) == 1) {
+                $id = intval($this->getParameter($_POST, 'reportId'));
+                $childId = intval($this->getParameter($_POST, 'childId'));
+                $dateReport = $this->getParameter($_POST, 'dateReport');
+                $dateReport = date('Y-m-d', strtotime($dateReport));
+                $behavior = $this->getParameter($_POST, 'behavior');
+                $comments = $this->getParameter($_POST, 'comments');
+                $activities = $this->getParameter($_POST, 'activities');
+                $meal = $this->getParameter($_POST, 'meal');
+                $nap = $this->getParameter($_POST, 'nap');
+                $info = $this->getParameter($_POST, 'info');
+
+                $this->ctrlReport->changeReport($childId, $dateReport, $behavior, $comments, $activities, $meal, $nap, $info, $id);
+              }
+              else {
+                throw new \Exception("Vous n'avez pas les droits nécessaires");
+              }
             break;
 
             // Sinon envoie un message d'erreur
