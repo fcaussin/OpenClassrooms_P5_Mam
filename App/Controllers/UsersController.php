@@ -18,6 +18,7 @@
       $this->child = new ChildrenManager;
     }
 
+    // Affichage de l'accueil utilisateur
     public function homeUser()
     {
       // Si compte administrateur
@@ -62,6 +63,62 @@
         $viewLogin = new View("Login");
         $viewLogin->generateView(array('errorLogin' => $errorLogin));
       }
+    }
+
+    public function createUser($username, $password, $admin)
+    {
+      $newUser = new Users (['username' => $username, 'password' => $password, 'admin' => $admin]);
+
+      $this->users->addUser($newUser);
+    }
+
+    // Modification du mot de passe
+    public function changeUser($oldPassword, $password1, $password2)
+    {
+      $id = $_SESSION['id'];
+      $username = $_SESSION['username'];
+      $admin = $_SESSION['admin'];
+
+      // Récupère un utilisateur
+      $user = $this->users->getUser($username);
+
+      // Vérifie que le mot de passe correspond
+      $checkPassword = password_verify($oldPassword, $user['password']);
+      // Si le mot de passe est bon
+      if ($checkPassword) {
+        // Si les mots de passe correspondent
+        if ($password1 == $password2) {
+
+          $userUpdate = new Users(['username' => $username, 'password' => $password1, 'admin' => $admin, 'id' => $id]);
+          // Modifie le mot de passe
+          $this->users->updateUser($userUpdate);
+
+          $updatePassword = "Votre mot de passe est modifier";
+        }
+        else {
+          $updatePassword = "Veuillez confirmer votre nouveau mot de passe";
+        }
+      }
+      else {
+        $updatePassword = "Votre identifiant ou votre mot de passe est incorrect";
+      }
+      $viewLoginAdmin = new View("LoginAdmin");
+      $viewLoginAdmin->generateView(array('updatePassword' => $updatePassword));
+    }
+
+    public function eraseUser($userId)
+    {
+      $this->users->deleteUser($userId);
+    }
+
+    // Affiche la vue gestion des utilisateurs
+    public function usersAdmin()
+    {
+      $user = $this->users->getUsers();
+      $children = $this->child->getAllChildren();
+
+      $view = new View("UsersAdmin");
+      $view->generateView(array('user' => $user, 'children' => $children));
     }
 
     // Destruction de la session à la déconnexion

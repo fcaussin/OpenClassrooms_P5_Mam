@@ -28,8 +28,8 @@
     // Ajoute un utilisateur
     public function addUser(Users $users)
     {
-      $sql = "INSERT INTO users(username, password, admin) VALUES(?,?,NULL)";
-      $newUser = $this->executeRequest($sql, array($users->username(), $users->password()));
+      $sql = "INSERT INTO users(username, password, admin) VALUES(?,?,?)";
+      $newUser = $this->executeRequest($sql, array($users->username(), $users->password(), $users->admin()));
 
       return $newUser;
     }
@@ -37,8 +37,8 @@
     // Modifie l'utilisateur
     public function updateUser(Users $users)
     {
-      $sql = "UPDATE users SET password = ?, username = ? WHERE id = ?";
-      $newPassword = $this->executeRequest($sql, array($users->password(), $users->username(), $users->id()));
+      $sql = "UPDATE users SET username = ?, password = ?, admin = ?  WHERE id = ?";
+      $newPassword = $this->executeRequest($sql, array($users->username(), $users->password(), $users->admin(), $users->id()));
 
       return $newPassword;
     }

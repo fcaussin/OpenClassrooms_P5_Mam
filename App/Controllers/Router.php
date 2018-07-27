@@ -9,6 +9,7 @@
   {
     private $viewHome;
     private $viewLogin;
+    private $viewLoginAdmin;
     private $ctrlUsers;
     private $ctrlChildren;
     private $ctrlReport;
@@ -18,6 +19,7 @@
     {
       $this->viewHome = new View("Home");
       $this->viewLogin = new View("Login");
+      $this->viewLoginAdmin = new View("LoginAdmin");
       $this->ctrlUsers = new UsersController;
       $this->ctrlChildren = new ChildrenController;
       $this->ctrlReport = new ReportController;
@@ -51,6 +53,74 @@
               $password = $this->getParameter($_POST, 'password');
               // Vérification des données de Connexion
               $this->ctrlUsers->Login($username, $password);
+            break;
+
+            // Requête affichage page modification mot de passe
+            case 'loginAdmin':
+              if (isset($_SESSION['id'])) {
+                $updatePassword = "";
+                $this->viewLoginAdmin->generateView(array('updatePassword' => $updatePassword));
+              }
+              else {
+                throw new \Exception("Vous n'êtes pas connecté");
+              }
+            break;
+
+            // Requête modification mot de passe
+            case 'updateLogin':
+              if (isset($_SESSION['id'])) {
+                $oldPassword = $this->getParameter($_POST, 'oldPassword');
+                $password1 = $this->getParameter($_POST, 'password1');
+                $password2 = $this->getParameter($_POST, 'password2');
+
+                $this->ctrlUsers->changeUser($oldPassword, $password1, $password2);
+              }
+              else {
+                throw new \Exception("Vous n'êtes pas connecté");
+              }
+            break;
+
+            // Requête affichage gestion utilisateur
+            case 'usersAdmin':
+              if (isset($_SESSION['admin']) == 1) {
+                $this->ctrlUsers->usersAdmin();
+              }
+              else {
+                throw new \Exception("Vous n'avez pas les droits nécessaires");
+              }
+            break;
+
+            // Requête création d'un utilisateur
+            case 'createUser':
+              if (isset($_SESSION['admin']) == 1) {
+                $username = $this->getParameter($_POST, 'username');
+                $password = $this->getParameter($_POST, 'password');
+                $admin = intval($this->getParameter($_POST, 'admin'));
+
+                $this->ctrlUsers->createUser($username, $password, $admin);
+
+                $this->ctrlUsers->usersAdmin();
+              }
+              else {
+                throw new \Exception("Vous n'avez pas les droits nécessaire");
+
+              }
+            break;
+
+            // Requête de suppression d'un utilisateur
+            case 'deleteUser':
+              if (isset($_SESSION['admin']) == 1) {
+                $userId = intval($this->getParameter($_POST, 'userId'));
+                // Si l'id de l'utilisateur est valide on le supprime
+                if ($userId != $_SESSION['id']) {
+                  $this->ctrlUsers->eraseUser($userId);
+
+                  $this->ctrlUsers->usersAdmin();
+                }
+              }
+              else {
+                throw new \Exception("Vous n'avez pas les droits nécessaires");
+              }
             break;
 
             // Requête deconnexion
@@ -129,7 +199,7 @@
                 // Récupère les paramètres
                 $id_Get = intval($this->getParameter($_GET, 'id'));
                 $childId = intval($this->getParameter($_POST,'childId'));
-                // Si id de l'article est valide on le supprime
+                // Si id de l'enfant est valide on le supprime
                 if ($id_Get == $childId) {
                   $this->ctrlChildren->eraseChild($childId);
 

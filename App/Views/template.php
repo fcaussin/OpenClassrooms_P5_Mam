@@ -20,13 +20,18 @@
             <ul class="right hide-on-med-and-down">
               <li><a href="index.php">Accueil</a></li>
               <li><a href="#contact">Contact</a></li>
-              <!-- Si pas de session affiche se connecter -->
+              <!-- Si pas de session affiche contact et se connecter -->
               <?php if (empty($_SESSION)): ?>
-                <li><a href="index.php?action=login">Se Connecter</a></li>
+              <li><a href="index.php?action=login">Se Connecter</a></li>
 
               <!-- Sinon affiche l'utilisateur et le lien de déconnexion -->
               <?php else: ?>
                 <li><a href="index.php?action=login"><?= $_SESSION['username']; ?></a></li>
+
+                <?php if ($_SESSION['admin'] == 1): ?>
+                  <li><a href="index.php?action=usersAdmin" ><i class="material-icons">people</i></a></li>
+                <?php endif; ?>
+                <li><a href="index.php?action=loginAdmin"><i class="material-icons">settings</i></a></li>
                 <li><a href="index.php?action=disconnect">Se déconnecter</a></li>
               <?php endif ?>
             </ul>
@@ -34,13 +39,17 @@
             <ul id="nav-mobile" class="sidenav deep-orange lighten-2">
               <li><a href="index.php" class="white-text">Accueil</a></li>
               <li><a href="#contact" class="white-text">Contact</a></li>
-              <!-- Si pas de session affiche se connecter -->
+              <!-- Si pas de session affiche contact et se connecter -->
               <?php if (empty($_SESSION)) {?>
-                <li><a href="index.php?action=login" class="white-text">Se Connecter</a></li>
+              <li><a href="index.php?action=login" class="white-text">Se Connecter</a></li>
 
               <!-- Sinon affiche l'utilisateur et le lien de déconnexion -->
               <?php } else { ?>
                 <li><a href="index.php?action=login" class="white-text"><?= $_SESSION['username']; ?></a></li>
+                <?php if ($_SESSION['admin'] == 1): ?>
+                  <li><a href="index.php?action=usersAdmin" class="white-text">Gestion des Utilisateurs</a></li>
+                <?php endif; ?>
+                <li><a href="index.php?action=loginAdmin" class="white-text">Paramètres</a></li>
                 <li><a href="index.php?action=disconnect" class="white-text">Se déconnecter</a></li>
               <?php } ?>
             </ul>

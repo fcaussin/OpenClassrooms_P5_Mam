@@ -53,7 +53,7 @@
 
     public function setId($id)
     {
-      $this->$id = (int) $id;
+      $this->id = (int) $id;
     }
 
     public function setUsername($username)
@@ -65,14 +65,12 @@
 
     public function setPassword($password)
     {
-      if (is_string($password)) {
         $this->password = password_hash($password, PASSWORD_DEFAULT);
-      }
     }
 
     public function setAdmin($admin)
     {
-      $this->$admin = (int) $admin;
+      $this->admin = (int) $admin;
     }
   }
 ?>
