@@ -6,7 +6,8 @@
 
   class UsersManager extends PDOManager
   {
-    // Récupère les données d'un utilisateur
+
+    // RECUPERER UN UTILISATEUR
     public function getUser($username)
     {
       $sql = "SELECT id, username, password, admin FROM users WHERE username = ?";
@@ -16,7 +17,8 @@
       return $user;
     }
 
-    // Récupère la liste des parents
+
+    // RECUPERER LA LISTE DES UTILISATEURS
     public function getUsers()
     {
       $sql = "SELECT id, username, password, admin FROM users";
@@ -25,7 +27,8 @@
       return $users;
     }
 
-    // Ajoute un utilisateur
+
+    // AJOUTER UN UTILISATEUR
     public function addUser(Users $users)
     {
       $sql = "INSERT INTO users(username, password, admin) VALUES(?,?,?)";
@@ -34,7 +37,8 @@
       return $newUser;
     }
 
-    // Modifie l'utilisateur
+
+    // MODIFIER UN UTILISATEUR
     public function updateUser(Users $users)
     {
       $sql = "UPDATE users SET username = ?, password = ?, admin = ?  WHERE id = ?";
@@ -43,7 +47,8 @@
       return $newPassword;
     }
 
-    // Efface un utilisateur
+
+    // EFFACER UN UTILISATEUR
     public function deleteUser($id)
     {
       $sql = "DELETE FROM users WHERE id = ?";

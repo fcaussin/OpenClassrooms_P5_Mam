@@ -6,8 +6,8 @@
 
   class ReportManager extends PDOManager
   {
-
-    // Récupère le dernier rapport d'un enfant
+    
+    // RECUPERER LE DERNIER RAPPORT D'UN ENFANT
     public function lastReport($childId)
     {
       $sql = "SELECT id, childId, DATE_FORMAT(dateReport, '%d-%m-%Y') AS dateReport_fr, behavior, comments, activities, meal, nap, info FROM report WHERE childId = ? ORDER BY dateReport DESC LIMIT 0, 1";
@@ -19,6 +19,8 @@
       $req->closeCursor();
     }
 
+
+    // RECUPERER UN RAPPORT D'UN ENFANT
     public function getReportById($reportId, $childId)
     {
       $sql = "SELECT id, childId, DATE_FORMAT(dateReport, '%d-%m-%Y') AS dateReport_fr, behavior, comments, activities, meal, nap, info FROM report WHERE id = ? AND childId = ?";
@@ -30,7 +32,8 @@
       $req->closeCursor();
     }
 
-    // Récupère les rapport du mois d'un enfants
+
+    //RECUPERER LES RAPPORTS DU MOIS ET DE MOINS D'UN AN D'UN ENFANT
     public function getReports($childId, $monthId)
     {
       $sql = "SELECT id, childId, DATE_FORMAT(dateReport, '%d-%m-%Y') AS dateReport_fr, behavior FROM report WHERE childId = ? AND MONTH(dateReport) = ? AND DATEDIFF(NOW(), dateReport) <= 365 ORDER BY dateReport DESC";
@@ -40,7 +43,8 @@
       return $reports;
     }
 
-    // Récupère les rapports d'un enfant par mois sur un an
+
+    // RECUPERER LES RAPPORTS DE MOINS D'UN AN D'UN ENFANT PAR MOIS
     public function getReportsByMonth($childId)
     {
       $sql = "SELECT childId, COUNT(MONTH(dateReport)) AS monthCount, CASE MONTH(dateReport)
@@ -63,7 +67,8 @@
       return $reports;
     }
 
-    // Ajouter un rapport
+
+    // AJOUTER UN RAPPORT
     public function addReport(Report $report)
     {
       $sql = "INSERT INTO report(childId, dateReport, behavior, comments, activities, meal, nap, info) VALUES(?,?,?,?,?,?,?,?)";
@@ -72,7 +77,8 @@
       return $newReport;
     }
 
-    // Modifier un rapport
+
+    // MODIFIER UN RAPPORT
     public function updateReport(Report $report)
     {
       $sql = "UPDATE report SET childId = ?, dateReport = ?, behavior = ?, comments = ?, activities = ?, meal = ?, nap = ?, info = ? WHERE id = ?";
@@ -81,13 +87,12 @@
       return $updateReport;
     }
 
-    // Effacer un rapport
+
+    // EFFACER UN RAPPORT
     public function deleteReport($id)
     {
       $sql = "DELETE FROM report WHERE id = ?";
       $this->executeRequest($sql, array($id));
     }
-
   }
-
 ?>

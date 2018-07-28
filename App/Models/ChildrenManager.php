@@ -5,7 +5,8 @@
 
   class ChildrenManager extends PDOManager
   {
-    // Récupère les enfants d'un utilisateur
+
+    // RECUPERER LES ENFANTS D'UN UTILISATEUR
     public function getChildren($parentId)
     {
       $sql = "SELECT id, parentId, childName, familyName, DATE_FORMAT(birthday, '%d-%m-%Y') AS birthday_fr, height, weight, note FROM children WHERE parentId = ? ORDER BY childName";
@@ -15,7 +16,8 @@
       return $children;
     }
 
-    // Récupère un enfant avec son id
+
+    // RECUPERER UN ENFANT AVEC SON ID
     public function getChild($childId)
     {
       $sql = "SELECT id, parentId, childName, familyName, DATE_FORMAT(birthday, '%d-%m-%Y') AS birthday_fr, height, weight, note FROM children WHERE id = ?";
@@ -27,7 +29,8 @@
       $req->closeCursor();
     }
 
-    // Récupère tous les enfants
+
+    // RECUPERER TOUS LES ENFANTS
     public function getAllChildren()
     {
       $sql = "SELECT id, parentId, childName, familyName, DATE_FORMAT(birthday, '%d-%m-%Y') AS birthday_fr, height, weight, note FROM children ORDER BY familyName, childName";
@@ -37,7 +40,8 @@
       return $children;
     }
 
-    // Ajouter un enfant
+
+    // AJOUTER UN ENFANT
     public function addChild(Children $children)
     {
       $sql = "INSERT INTO children(parentId, childName, familyName, birthday, height, weight, note) VALUES(?,?,?,?,?,?,?)";
@@ -46,7 +50,8 @@
       return $newChild;
     }
 
-    // Modifier un enfant
+
+    // MODIFIER UN ENFANT
     public function updateChild(Children $children)
     {
       $sql = "UPDATE children SET parentId = ?, childName = ?, familyName = ?, birthday = ?, height = ?, weight = ?, note = ? WHERE id = ?";
@@ -55,7 +60,8 @@
       return $updateChild;
     }
 
-    // Effacer un enfant
+
+    // EFFACER UN ENFANT
     public function deleteChild($id)
     {
       $sql = "DELETE FROM children WHERE id = ?";
