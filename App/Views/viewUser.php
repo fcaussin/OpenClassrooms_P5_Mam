@@ -10,39 +10,50 @@
         <p>Vous pouvez modifier les informations de votre/vos enfant(s) à tout moment, n'hésitez pas à les mettre à jour régulièrement pour une meilleure prise en charge. Vous avez également accès au dernier compte-rendu et à tout l'historique sur un an afin de suivre l'évolution de votre/vos enfant(s).</p>
       </div>
 
+
+      <!-- CARTE METEO DU MATIN -->
       <div class="col s12 m6">
         <div class="card horizontal">
           <div class="card-image waves-effect waves-block waves-light">
+              <!-- Icone du temps -->
               <img class="activator iconMorning" src="">
           </div>
           <div class="card-content">
             <span class="card-title activator deep-orange-text text-lighten-2"><i class="material-icons right">arrow_drop_down</i>Demain matin</span>
+            <!-- Date de la prévision météo -->
             <p class="dateMorning blue-text text-lighten-1"></p>
           </div>
           <div class="card-reveal">
             <span class="card-title titleMorning">Météo<i class="material-icons right">close</i></span>
             <p>
+              <!-- Température -->
               <span class="tempMorning"></span>
               <br>
+              <!-- Description du temps -->
               <span class="weatherMorning blue-text text-lighten-1"></span>
             </p>
           </div>
         </div>
 
+
+        <!-- CARTE METEO DE L'APRES-MIDI -->
         <div class="card horizontal">
           <div class="card-image waves-effect waves-block waves-light">
-
+              <!-- Icone du temps -->
               <img class="activator iconAfternoon" src="">
           </div>
           <div class="card-content">
             <span class="card-title activator deep-orange-text text-lighten-2"><i class="material-icons right">arrow_drop_down</i>Demain après-midi</span>
+            <!-- Date de la prévision météo -->
             <p class="dateAfternoon blue-text text-lighten-1"></p>
           </div>
           <div class="card-reveal">
             <span class="card-title titleAfternoon">Météo<i class="material-icons right">close</i></span>
             <p>
+              <!-- Température -->
               <span class="tempAfternoon"></span>
               <br>
+              <!-- Description du temps -->
               <span class="weatherAfternoon blue-text text-lighten-1"></span>
             </p>
           </div>

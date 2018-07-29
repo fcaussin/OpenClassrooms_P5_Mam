@@ -20,23 +20,22 @@
       <div class="col s12 center">
         <div class="report-title">
           <h5>Comment s'est déroulée ma journée ?</h5>
-          <span><i class="medium material-icons deep-orange-text text-lighten-2">
-
+          <span>
             <!-- Affiche un emoticon en fonction du comportement -->
             <?php switch ($report['behavior']) {
               case 'Parfait':
-                echo "sentiment_very_satisfied";
+                echo '<i class="medium material-icons green-text text-accent-4 behavior-color">sentiment_very_satisfied</i>';
               break;
 
               case 'Bon':
-                echo "sentiment_neutral";
+                echo '<i class="medium material-icons blue-text text-lighten-1 behavior-color">sentiment_neutral</i>';
               break;
 
               default:
-                echo "sentiment_very_dissatisfied";
+                echo '<i class="medium material-icons red-text">sentiment_very_dissatisfied</i>';
               break;
             } ?>
-          </i></span>
+          </span>
         </div>
       </div>
 
