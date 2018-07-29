@@ -5,7 +5,7 @@
 <div class="container">
   <div class="section">
     <div class="row center">
-      <h4>Modifiez votre mot de passe : <span class="deep-orange-text text-lighten-2"><?= $_SESSION['username'] ?></span></h4>
+      <h4>Modifier votre mot de passe : <span class="deep-orange-text text-lighten-2"><?= $_SESSION['username'] ?></span></h4>
       <!-- Affiche un message d'erreur si besoin -->
       <p class="red-text"><?= $updatePassword ?></p>
 

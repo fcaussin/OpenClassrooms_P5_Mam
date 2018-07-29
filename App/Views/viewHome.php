@@ -63,7 +63,7 @@
           <h2 class="center deep-orange-text text-lighten-2"><i class="material-icons">extension</i></h2>
           <h5 class="center">Notre application</h5>
 
-          <p class="light description">La M.A.M. des Poussins vous propose de suivre le déroulement de la journée de votre enfant grâce à notre application. Connectez-vous et accédez à tout moment à votre compte-rendu et suivez l'évolution de votre enfant jour après jour.</p>
+          <p class="light description">La M.A.M. des Poussins vous propose de suivre le déroulement de la journée de votre enfant grâce à notre application. Connectez-vous et accédez à tout moment aux comptes-rendus de votre enfant et suivez son évolution jour après jour. Chaque compte-rendu possède une notation simple qui vous permet de voir d'un coup d'oeil l'appréciation du déroulement de la journée de votre enfant.</p>
         </div>
       </div>
     </div>

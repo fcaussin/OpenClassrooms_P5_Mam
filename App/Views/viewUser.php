@@ -7,7 +7,7 @@
     <div class="row">
       <div class="col s12 center">
         <h4>Informations de votre/vos enfant(s)</h4>
-        <p>Vous pouvez modifier les informations de votre/vos enfant(s), n'hésitez pas à les mettre à jour régulièrement. Vous avez accès au dernier compte-rendu et également à tout l'historique sur un an.</p>
+        <p>Vous pouvez modifier les informations de votre/vos enfant(s) à tout moment, n'hésitez pas à les mettre à jour régulièrement pour une meilleure prise en charge. Vous avez également accès au dernier compte-rendu et à tout l'historique sur un an afin de suivre l'évolution de votre/vos enfant(s).</p>
       </div>
 
       <div class="col s12 m6">

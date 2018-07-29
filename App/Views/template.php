@@ -95,7 +95,7 @@
           <div class="row">
             <div class="col s12 center">
               <h4>Contactez-nous</h4>
-              <p class="center-align light">Vous avez des questions ou besoins de plus d'informations. N'hésitez pas à nous contacter par mail :</p>
+              <p class="center-align light">Vous avez des questions ou besoin de plus d'informations. N'hésitez pas à nous contacter par mail :</p>
             </div>
             <form class="col s12 center" action="mailto:fabien.caussin@free.fr">
               <button class="btn waves-effect waves-light deep-orange lighten-2" type="submit" name="action">Contact
