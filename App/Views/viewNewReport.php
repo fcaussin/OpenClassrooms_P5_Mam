@@ -28,7 +28,7 @@
               <option value="Bon" selected>Bon</option>
               <option value="Mauvais">Mauvais</option>
             </select>
-            <label for="behavior">Evaluation de la journée</label>
+            <label for="behavior">Comportement de la journée</label>
           </div>
           <!-- Commentaires -->
           <div class="input-field col s12 m6">

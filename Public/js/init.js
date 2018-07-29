@@ -19,3 +19,6 @@ $(document).ready(function(){
     }
   });
 });
+
+// Initialisation du composant Météo
+Weather.initWeather("http://api.openweathermap.org/data/2.5/forecast?lat=43.668522&lon=6.981608&APPID=174061633320714270620f7f3161ce1c&cnt=16&units=metric&lang=fr");

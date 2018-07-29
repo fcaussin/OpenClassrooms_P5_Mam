@@ -24,11 +24,12 @@
           <!-- Comportement -->
           <div class="input-field col s12 m6">
             <select id="behavior" name="behavior" value="<?= $report['behavior'] ?>">
+              <option value="<?= $report['behavior'] ?>" disabled selected><?= $report['behavior'] ?></option>
               <option value="Parfait">Parfait</option>
               <option value="Bon">Bon</option>
               <option value="Mauvais">Mauvais</option>
             </select>
-            <label for="behavior">Evaluation de la journée</label>
+            <label for="behavior">Comportement de la journée</label>
           </div>
           <!-- Commentaires -->
           <div class="input-field col s12 m6">

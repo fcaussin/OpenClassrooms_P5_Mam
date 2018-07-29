@@ -10,6 +10,45 @@
         <p>Vous pouvez modifier les informations de votre/vos enfant(s), n'hésitez pas à les mettre à jour régulièrement. Vous avez accès au dernier compte-rendu et également à tout l'historique sur un an.</p>
       </div>
 
+      <div class="col s12 m6">
+        <div class="card horizontal">
+          <div class="card-image waves-effect waves-block waves-light">
+              <img class="activator iconMorning" src="">
+          </div>
+          <div class="card-content">
+            <span class="card-title activator deep-orange-text text-lighten-2"><i class="material-icons right">arrow_drop_down</i>Demain matin</span>
+            <p class="dateMorning blue-text text-lighten-1"></p>
+          </div>
+          <div class="card-reveal">
+            <span class="card-title titleMorning">Météo<i class="material-icons right">close</i></span>
+            <p>
+              <span class="tempMorning"></span>
+              <br>
+              <span class="weatherMorning blue-text text-lighten-1"></span>
+            </p>
+          </div>
+        </div>
+
+        <div class="card horizontal">
+          <div class="card-image waves-effect waves-block waves-light">
+
+              <img class="activator iconAfternoon" src="">
+          </div>
+          <div class="card-content">
+            <span class="card-title activator deep-orange-text text-lighten-2"><i class="material-icons right">arrow_drop_down</i>Demain après-midi</span>
+            <p class="dateAfternoon blue-text text-lighten-1"></p>
+          </div>
+          <div class="card-reveal">
+            <span class="card-title titleAfternoon">Météo<i class="material-icons right">close</i></span>
+            <p>
+              <span class="tempAfternoon"></span>
+              <br>
+              <span class="weatherAfternoon blue-text text-lighten-1"></span>
+            </p>
+          </div>
+        </div>
+      </div>
+
       <!-- Affiche une carte pour chaque enfants -->
       <?php foreach ($children as $children): ?>
         <div class="col s12 m6">

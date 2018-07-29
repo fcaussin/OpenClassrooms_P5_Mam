@@ -19,7 +19,7 @@
       <!-- Comportement -->
       <div class="col s12 center">
         <div class="report-title">
-          <h5>Comment c'est déroulée ma journée ?</h5>
+          <h5>Comment s'est déroulée ma journée ?</h5>
           <span><i class="medium material-icons deep-orange-text text-lighten-2">
 
             <!-- Affiche un emoticon en fonction du comportement -->
@@ -79,7 +79,7 @@
 
           <!-- SI base de données vide affiche "Aucune informations" -->
           <?php if (!$report['info']): ?>
-            <p>Aucune informations</p>
+            <p>Aucune information</p>
             <!-- SINON affiche l'information -->
           <?php else: ?>
             <p><?= $report['info'] ?></p>

@@ -130,8 +130,10 @@
       </footer>
     </div>
 
+
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/materialize.js"></script>
+    <script type="text/javascript" src="js/weather.js"></script>
     <script type="text/javascript" src="js/init.js"></script>
   </body>
 </html>
