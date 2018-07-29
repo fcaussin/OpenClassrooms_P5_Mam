@@ -32,13 +32,15 @@ var Weather = {
       apiDatas.forEach(function(apiData) {
 
         // Récupère le jour et l'heure de chaque prévision
-        var day = new Date(apiData.dt_txt).getDate();
-        var hour = new Date(apiData.dt_txt).getHours();
+        var day = new Date(apiData.dt*1000).getDate();
+        var hour = new Date(apiData.dt*1000).getHours();
+
+        console.log(day + " " + hour);
 
        // Si le jour correspond à demain
         if (day === dayOfTomorrow) {
           switch (hour) {
-            case 9:
+            case 8:
               // Récupère id de l'icone
               iMorning = apiData.weather[0].icon;
               // Récupère le temps prévu
@@ -46,7 +48,7 @@ var Weather = {
               // Récupère la température prévue
               tMorning = apiData.main.temp;
               // Récupère la date et l'heure
-              dMorning = new Date(apiData.dt_txt).toLocaleString();
+              dMorning = new Date(apiData.dt*1000).toLocaleString();
               // Envoie le chemin de l'image
               var imgMorning = "img/" + iMorning + ".png";
 
@@ -57,7 +59,7 @@ var Weather = {
               $('.weatherMorning').text(wMorning);
             break;
 
-            case 15:
+            case 14:
               // Récupère id de l'icone
               iAfternoon = apiData.weather[0].icon;
               // Récupère le temps prévu
@@ -65,7 +67,7 @@ var Weather = {
               // Récupère la température prévue
               tAfternoon = apiData.main.temp;
               // Récupère la date et l'heure
-              dAfternoon = new Date(apiData.dt_txt).toLocaleString();
+              dAfternoon = new Date(apiData.dt*1000).toLocaleString();
               // Envoie le chemin de l'image
               var imgAfternoon = "img/" + iAfternoon + ".png";
 
