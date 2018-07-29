@@ -78,7 +78,7 @@
 
           <!-- SI base de données vide affiche "Aucune informations" -->
           <?php if (!$report['info']): ?>
-            <p>Aucune information</p>
+            <p>Aucune informations</p>
             <!-- SINON affiche l'information -->
           <?php else: ?>
             <p><?= $report['info'] ?></p>
