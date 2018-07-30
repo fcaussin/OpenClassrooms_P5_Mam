@@ -26,7 +26,7 @@
       if (($_SESSION['admin'] == 1 && isset($child["id"])) || $child['parentId'] == $_SESSION['id'])
       {
         // Affiche la vue adminChild
-        $view = new View("adminChild");
+        $view = new View("AdminChild");
         $view->generateView(array('child' => $child));
       }
       // SINON Envoie un message d'erreur
